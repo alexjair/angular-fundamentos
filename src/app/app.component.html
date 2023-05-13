@@ -7,6 +7,143 @@
   <title>Document</title>
 </head>
 <body>
+<p>
+  {{1+1}}
+  {{[1,2].reverse()}}
+
+</p>
+  <h1>Formulario</h1>
+  <form (ngSubmit)="onRegister()" #frmRegistro = "ngForm">
+    <div class="input-group">
+
+      <label for="name">Nombre</label>
+      <input required type="text" [(ngModel)] = "objRegistro.name" id="reg_name" name="name"/>
+      <p>Mensaje de error</p>
+
+      <label for="email">Email</label>
+      <input required type="email" [(ngModel)] = "objRegistro.email" id="reg_email" name="email"/>
+      <p>Mensaje de error</p>
+
+      <label for="password">Clave</label>
+      <input required type="text" [(ngModel)] = "objRegistro.password"  id="reg_password" name="password"/>
+      <p>Mensaje de error</p>
+
+    </div>
+
+    <button [disabled]="frmRegistro.invalid"  type="submit">Registrar</button>
+    <button type="button">Accion</button>
+  </form>
+
+  <hr>
+  <h1>NgClass & NgStyle</h1>
+  <input type="text" required #nameInput4="ngModel" [(ngModel)]="objPersona.name" />
+  <hr class="line-error"
+    [ngClass]="{
+      'valid': nameInput4.valid,
+      'invalid': nameInput4.invalid
+    }"
+  >
+  <p class="message-error" [class.invalid]="nameInput4.invalid">
+    El campo es requerido
+  </p>
+
+  <div class="styles">
+    <div>
+      <input type="number" [(ngModel)] = "objBox.width"/>
+      <input type="number"  [(ngModel)] = "objBox.width"/>
+      <input type="color"  [(ngModel)] = "objBox.background"/>
+    </div>
+    <div>
+      <div [ngStyle]="
+      {
+        'width.px': objBox.width,
+        'height.px' : objBox.heigth,
+        'background' : objBox.background,
+        'display': 'block'
+      }
+      "></div>
+    </div>
+  </div>
+
+  <h1>Class & Style</h1>
+  <input type="text" required #nameInput2="ngModel" [(ngModel)]="objPersona.name" />
+  <p class="message-error" [class.invalid]="nameInput2.invalid">
+    El campo es requerido
+  </p>
+
+  <label>Nombre</label>
+  <input type="text" required #nameInput3="ngModel" [(ngModel)]="objPersona.name" />
+  <p [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'">Texto texto texto</p>
+
+  <div class="styles">
+    <div>
+      <input type="text" [(ngModel)]="widthImg" />
+    </div>
+    <div>
+      <img [style.width.%]="widthImg" [src]="img" />
+      <!-- <img [style.width.px]="widthImg" [src]="objPersona.img" /> -->
+    </div>
+  </div>
+
+  <hr>
+  <h1> Estructura [ngSwitch] *ngSwitchCase </h1>
+
+  <input type="text" required [(ngModel)]="objPersona.name" />
+  <div [ngSwitch]="objPersona.name">
+    <p *ngSwitchCase="'jair'">
+      Escribistes Jair
+    </p>
+    <p *ngSwitchCase="'luz'">
+      Escribistes Luz
+    </p>
+    <p *ngSwitchCase="'laura'">
+      Escribistes Laura
+    </p>
+    <p *ngSwitchDefault="'No hace match'">
+      sin hacer match
+    </p>
+  </div>
+
+
+  <hr>
+  <h1> Estructura *ngfor </h1>
+
+  <div class="product--grid">
+    <div *ngFor="let vProduct of arrayProducts" >
+      <img [src]="vProduct.image" alt="{{vProduct.name}}">
+      <h2>{{vProduct.price}}</h2>
+      <p>{{vProduct.name}}</p>
+    </div>
+  </div>
+
+  <input type="text" required [(ngModel)]="nombreNew" />
+  <button (click)="metAgregarNombre()"> add Nombre </button>
+  <ul>
+    <li *ngFor="let name of arrayNames; index as i">
+      <button (click)="meteliminarNombre(i)">Delete</button>
+      {{i}} - {{name}}
+    </li>
+  </ul>
+  <ul>
+    <li *ngFor="let iconos of arrayEmojis; index as j">
+      {{j}} - {{iconos}}
+    </li>
+  </ul>
+
+  <hr>
+  <h1> Estructura *ngIf </h1>
+  <input type="text" required [(ngModel)]="objPersona.name" />
+  <p *ngIf="objPersona.name === 'jair'">Soy Jair</p>
+  <p *ngIf="
+      objPersona.name === 'alex' $$
+      objPersona.age === 18 ;
+      else my_blok
+    ">Soy Alex</p>
+
+  <ng-template #my_blok>
+    <p>My bloque esle (no es name alex ni es age 18)</p>
+  </ng-template>
+
 
   <hr>
   <h1> ngModel </h1>
